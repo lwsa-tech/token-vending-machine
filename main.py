@@ -288,7 +288,7 @@ def load_and_render_policy(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Policy template not found",
         )
-    except IOError as e:
+    except OSError as e:
         logger.error(
             "Failed to read policy template",
             extra={"path": template_path, "error": str(e)},
@@ -337,7 +337,7 @@ def assume_role_with_policy(
             Policy=policy,
             DurationSeconds=duration_seconds,
         )
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - normalize SDK failures to an HTTP response
         logger.error(
             "Failed to assume AWS role",
             extra={"role_arn": role_arn, "session_name": session_name, "error": str(e)},
