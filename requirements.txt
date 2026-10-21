@@ -1,9 +1,9 @@
 fastapi==0.143.0
 uvicorn[standard]==0.54.0
-kubernetes==35.0.0
+kubernetes==36.0.3
 boto3==1.43.82
 pydantic==2.14.0
 pydantic-settings==2.15.0
-python-json-logger==2.0.7
+python-json-logger==4.2.0
 Jinja2==3.1.6
 

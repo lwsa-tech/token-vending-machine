@@ -18,7 +18,7 @@ from kubernetes import client, config
 from kubernetes.client.exceptions import ApiException
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings
-from pythonjsonlogger import jsonlogger
+from pythonjsonlogger.json import JsonFormatter
 
 # Context variable for request-scoped data
 request_id_ctx: ContextVar[str] = ContextVar("request_id", default="-")
@@ -42,7 +42,7 @@ def setup_logging(log_level: str = "INFO") -> logging.Logger:
 
     # JSON handler to stdout
     handler = logging.StreamHandler(sys.stdout)
-    formatter = jsonlogger.JsonFormatter(
+    formatter = JsonFormatter(
         fmt="%(asctime)s %(levelname)s %(name)s %(request_id)s %(message)s",
         rename_fields={"asctime": "timestamp", "levelname": "level", "name": "logger"},
         datefmt="%Y-%m-%dT%H:%M:%S%z",
